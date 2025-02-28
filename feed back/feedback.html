@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Feedback Form</h2>
+        <form id="feedbackForm">
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" required>
+            </div>
+            <div class="form-group">
+                <label for="register">Register Number:</label>
+                <input type="text" id="register" name="register" required>
+            </div>
+            <div class="form-group">
+                <label for="trainer">Trainer Name:</label>
+                <input type="text" id="trainer" name="trainer" required>
+            </div>
+            <div class="form-group">
+                <label for="feedback">Feedback:</label>
+                <select id="feedback" name="feedback" required>
+                    <option value="random">Random</option>
+                    <option value="good">Good</option>
+                    <option value="average">Average</option>
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById("email").value;
+            const name = document.getElementById("name").value;
+            const department = document.getElementById("department").value;
+            const register = document.getElementById("register").value;
+            const trainer = document.getElementById("trainer").value;
+            const feedback = document.getElementById("feedback").value;
+            
+            let feedbackList = JSON.parse(localStorage.getItem("feedbackList")) || [];
+            feedbackList.push({ email, name, department, register, trainer, feedback });
+            localStorage.setItem("feedbackList", JSON.stringify(feedbackList));
+            
+            document.getElementById("feedbackForm").reset();
+            alert("Feedback submitted successfully!");
+        });
+    </script>
+</body>
+</html>
